@@ -22,17 +22,12 @@ const getPendingById = async (req, res) => {
 };
 
 const createAppointment = async (req, res) => {
-    const { date, userId } = req.body;
-
-    if (!date || !userId) {
-        res.status(400).json({
-            status: 'error',
-            message: 'Must provide all elemets for this request'
-        });
-    }
+    const { date, computerNumber, comments, userId } = req.body;
 
     const newAppointment = await Repair.create({
         date,
+        computerNumber,
+        comments,
         userId
     });
 

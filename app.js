@@ -4,8 +4,8 @@ const express = require('express');
 const { userRouter } = require('./routes/users.routes');
 const { repairRouter } = require('./routes/repairs.routes');
 
-// utils
-const { db } = require('.//utils/dataBase');
+// Utils
+const { globalErrorHandler } = require('./controllers/errors.controller');
 
 // Init express
 const app = express();
@@ -17,15 +17,7 @@ app.use(express.json());
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/repairs', repairRouter);
 
-db.authenticate()
-.then(() => console.log('DataBase is authenticated'))
-.catch(err => console.log(err))
+// Global error handler
+app.use('*', globalErrorHandler);
 
-db.sync({force:true})
-.then(() => console.log('DataBase is synced'))
-.catch(err => console.log(err))
-
-const PORT = 4000;
-app.listen(PORT, () => {
-    console.log(`Express are running on PORT: ${PORT}`);
-});
+module.exports = { app }

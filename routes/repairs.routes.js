@@ -12,10 +12,11 @@ const {
 
 // Middleware
 const { pendingExist } = require('../middlewares/repairs.middlewares');
+const { createRepairValidations, checkValidations } = require('../middlewares/validations.middleware');
 
 // Enpoints
 router.get('/', getAllPendings);
-router.post('/', createAppointment);
+router.post('/', createRepairValidations, checkValidations, createAppointment);
 router
     .route('/:id')
     .get(pendingExist, getPendingById)

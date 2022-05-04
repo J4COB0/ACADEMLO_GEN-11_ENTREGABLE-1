@@ -9,7 +9,15 @@ const Repair = db.define('repair', {
         allowNull: false
     },
     date: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    computerNumber: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    comments: {
+        type: DataTypes.STRING(100),
         allowNull: false
     },
     status: {

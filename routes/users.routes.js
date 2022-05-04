@@ -10,12 +10,18 @@ const {
     deleteUser
 } = require('../controllers/users.controllers');
 
-//Utils
+// Middlewares
 const { userExists } = require('../middlewares/users.middlewares');
+const { checkValidations, createUserValidations } = require('../middlewares/validations.middleware');
 
 // Enpoints
 router.get('/', getAllUsers);
-router.post('/', createUser);
+router.post(
+    '/',
+    createUserValidations,
+    checkValidations,
+    createUser
+);
 router
     .route('/:id')
     .get(userExists, getUserById)

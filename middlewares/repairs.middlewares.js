@@ -1,28 +1,25 @@
 // Models
 const { Repair } = require('../models/repair.model');
 
-const pendingExist = async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const pending = await Repair.findOne({
-            where: {
-                status: 'pending',
-                id
-            }
-        });
+// Utils
+const { catchAsync } = require('../utils/catchAsync');
+const { AppError } = require('../utils/appError.class');
 
-        if (!pending) {
-            res.status(404).json({
-                status: 'error',
-                message: 'Pending not found, invalid ID'
-            });
+const pendingExist = catchAsync(async (req, res, next) => {
+    const { id } = req.params;
+    const pending = await Repair.findOne({
+        where: {
+            status: 'pending',
+            id
         }
+    });
 
-        req.pending = pending;
-        next();
-    } catch (error) {
-        console.log(error);
+    if (!pending) {
+        return next(new AppError('Pending doesnt exist by given ID', 404));
     }
-};
+
+    req.pending = pending;
+    next();
+});
 
 module.exports = { pendingExist };
