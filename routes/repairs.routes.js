@@ -12,7 +12,10 @@ const {
 
 // Middleware
 const { pendingExist } = require('../middlewares/repairs.middlewares');
-const { createRepairValidations, checkValidations } = require('../middlewares/validations.middleware');
+const {
+    createRepairValidations,
+    checkValidations
+} = require('../middlewares/validations.middleware');
 
 // Enpoints
 router.get('/', getAllPendings);

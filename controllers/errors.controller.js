@@ -5,9 +5,9 @@ const globalErrorHandler = (err, req, res, next) => {
 
     res.status(statusCode).json({
         status: status,
-        // message: err.message,
+        message: err.message,
         error: err,
-        // stack: err.stack
+        stack: err.stack
     });
 };
 

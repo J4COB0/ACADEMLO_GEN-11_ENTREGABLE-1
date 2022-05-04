@@ -20,4 +20,4 @@ app.use('/api/v1/repairs', repairRouter);
 // Global error handler
 app.use('*', globalErrorHandler);
 
-module.exports = { app }
+module.exports = { app };

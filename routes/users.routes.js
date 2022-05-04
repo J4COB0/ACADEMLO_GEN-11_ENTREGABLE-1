@@ -12,16 +12,14 @@ const {
 
 // Middlewares
 const { userExists } = require('../middlewares/users.middlewares');
-const { checkValidations, createUserValidations } = require('../middlewares/validations.middleware');
+const {
+    checkValidations,
+    createUserValidations
+} = require('../middlewares/validations.middleware');
 
 // Enpoints
 router.get('/', getAllUsers);
-router.post(
-    '/',
-    createUserValidations,
-    checkValidations,
-    createUser
-);
+router.post('/', createUserValidations, checkValidations, createUser);
 router
     .route('/:id')
     .get(userExists, getUserById)

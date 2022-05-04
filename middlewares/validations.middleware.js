@@ -43,4 +43,8 @@ const checkValidations = (req, res, next) => {
     next();
 };
 
-module.exports = { createUserValidations, createRepairValidations, checkValidations };
+module.exports = {
+    createUserValidations,
+    createRepairValidations,
+    checkValidations
+};
