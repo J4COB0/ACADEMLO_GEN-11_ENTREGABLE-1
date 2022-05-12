@@ -7,7 +7,8 @@ const {
     getUserById,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    login
 } = require('../controllers/users.controllers');
 
 // Middlewares

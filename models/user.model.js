@@ -18,11 +18,12 @@ const User = db.define('user', {
         allowNull: false
     },
     password: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(255),
         allowNull: false
     },
     role: {
         type: DataTypes.STRING(10),
+        defaultValue: 'guest',
         allowNull: false
     },
     status: {
