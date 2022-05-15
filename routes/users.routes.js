@@ -12,19 +12,27 @@ const {
 } = require('../controllers/users.controllers');
 
 // Middlewares
-const { userExists } = require('../middlewares/users.middlewares');
+const {
+    userExists,
+    protectToken,
+    protectAdmin,
+    protectAccountOwner
+} = require('../middlewares/users.middlewares');
 const {
     checkValidations,
-    createUserValidations
+    createUserValidations,
+    loginUserValidations
 } = require('../middlewares/validations.middleware');
 
 // Enpoints
-router.get('/', getAllUsers);
+router.get('/login', loginUserValidations, checkValidations, login);
 router.post('/', createUserValidations, checkValidations, createUser);
+router.use('/', protectToken);
+router.get('/', getAllUsers);
 router
     .route('/:id')
-    .get(userExists, getUserById)
-    .patch(userExists, updateUser)
-    .delete(userExists, deleteUser);
+    .get(protectAdmin, userExists, getUserById)
+    .patch(userExists, protectAccountOwner, updateUser)
+    .delete(userExists, protectAccountOwner, deleteUser);
 
 module.exports = { userRouter: router };

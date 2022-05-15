@@ -14,6 +14,17 @@ const createUserValidations = [
         .withMessage('The password must be at least 4 characters')
 ];
 
+const loginUserValidations = [
+    body('email')
+        .notEmpty()
+        .withMessage('Email can not be empty')
+        .isEmail()
+        .withMessage('Must provide a valid email'),
+    body('password')
+        .notEmpty()
+        .withMessage('Password can not be empty')
+];
+
 const createRepairValidations = [
     body('date')
         .notEmpty()
@@ -46,5 +57,6 @@ const checkValidations = (req, res, next) => {
 module.exports = {
     createUserValidations,
     createRepairValidations,
+    loginUserValidations,
     checkValidations
 };
